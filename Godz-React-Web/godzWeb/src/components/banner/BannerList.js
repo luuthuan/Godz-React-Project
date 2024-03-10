@@ -4,8 +4,8 @@ import useSWR from "swr";
 import { SwiperSlide, Swiper } from "swiper/react";
 import BannerItem from "./BannerItem";
 
-const BannerList = ({ endPoint, subEndPoint }) => {
-  const { data } = useSWR(`${endPoint}${subEndPoint}`, fetcher);
+const BannerList = ({ url, endPoint }) => {
+  const { data } = useSWR(`${url}${endPoint}`, fetcher);
   const banners = data || [];
 
   return (

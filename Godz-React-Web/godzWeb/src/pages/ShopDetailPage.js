@@ -8,21 +8,22 @@ const ShopDetailPage = () => {
   const { productId } = useParams();
 
   const { data } = useSWR(
-    `https://65e08910d3db23f7624987f0.mockapi.io/api/v1/products?productID=${productId}`,
+    `https://65e08910d3db23f7624987f0.mockapi.io/api/v1/products_v1?productID=${productId}`,
     fetcher
   );
 
   if (!data) return null;
   const dataItem = data[0];
-  const { image, name, price, saledPrice } = dataItem;
+  console.log(dataItem);
 
+  const { image, nameProduct, costs, imageDetails, colors, sizes } = dataItem;
   return (
     <div className="py-10">
       <div className="grid grid-cols-8 gap-10 container-page  h-[1000px] px-4 py-6">
         <div className="col-span-5 grid grid-rows-4 gap-10  overflow-hidden border p-4  border-white rounded-3xl">
           <div className="row-span-3  flex justify-center pt-6 items-center  ">
             <img
-              src={image[0].imageUrl}
+              src={image}
               className="h-[700px] object-cover rounded-lg p-5 justify-self-center "
               alt=""
             />
@@ -35,8 +36,8 @@ const ShopDetailPage = () => {
                 spaceBetween={10}
                 slidesPerView={"auto"}
               >
-                {image.length > 0 &&
-                  image.map((imageItem) => (
+                {imageDetails.length > 0 &&
+                  imageDetails.map((imageItem) => (
                     <SwiperSlide key={imageItem.id}>
                       <img
                         src={imageItem.imageUrl}
@@ -53,11 +54,15 @@ const ShopDetailPage = () => {
           {/* header */}
           <div className="mb-12">
             <p className="text-sm uppercase mb-2">Godz.Tee</p>
-            <h1 className=" text-3xl text-white capitalize mb-2">{name}</h1>
+            <h1 className=" text-3xl text-white capitalize mb-2">
+              {nameProduct}
+            </h1>
             <div className="flex justify-start items-end mb-2">
-              <span className=" text-2xl text-white pr-2">{price}.000₫</span>
-              <span className=" text-sm block line-through text-white ">
-                {saledPrice}.000₫
+              <span className=" text-2xl text-white pr-2">
+                {costs[0].cost}.000₫
+              </span>
+              <span className=" text-sm block line-through text-gray-400 ">
+                {costs[0].saledCost}.000₫
               </span>
             </div>
           </div>
@@ -69,12 +74,19 @@ const ShopDetailPage = () => {
                 <div>Màu sắc</div>
               </div>
               <div className="flex justify-start items-center gap-x-3">
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  black
-                </span>
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  white
-                </span>
+                {colors.length > 0 &&
+                  colors.map((color) => (
+                    <span
+                      key={color.id}
+                      className={
+                        color.stats
+                          ? "w-20 text-center py-1 px-2 border text-white border-white rounded-md capitalize cursor-pointer"
+                          : "w-20 text-center py-1 px-2 border opacity-85 text-gray-400 border-gray-400 rounded-md capitalize select-none"
+                      }
+                    >
+                      {color.colorName}
+                    </span>
+                  ))}
               </div>
             </div>
             {/* size */}
@@ -84,18 +96,19 @@ const ShopDetailPage = () => {
                 <div>Bảng size</div>
               </div>
               <div className="flex justify-start items-center gap-x-3">
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  XS
-                </span>
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  S
-                </span>
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  M
-                </span>
-                <span className="w-20 text-center py-1 px-2 border border-white rounded-md capitalize">
-                  L
-                </span>
+                {sizes.length > 0 &&
+                  sizes.map((size) => (
+                    <span
+                      key={size.id}
+                      className={
+                        size.stats
+                          ? "w-20 text-center py-1 px-2 border text-white border-white rounded-md capitalize cursor-pointer"
+                          : "w-20 text-center py-1 px-2 opacity-85 text-gray-400 border border-gray-400 rounded-md capitalize select-none"
+                      }
+                    >
+                      {size.size}
+                    </span>
+                  ))}
               </div>
             </div>
             {/* count */}

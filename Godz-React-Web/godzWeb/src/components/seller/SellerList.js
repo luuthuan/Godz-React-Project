@@ -4,10 +4,10 @@ import SellerCard from "./SellerCard";
 import useSWR from "swr";
 import { fetcher } from "../../config";
 
-const SellerList = ({ endPoint, subEndPoint }) => {
-  const { data } = useSWR(`${endPoint}${subEndPoint}`, fetcher);
+const SellerList = ({ url, endPoint }) => {
+  const { data } = useSWR(`${url}${endPoint}`, fetcher);
   const bestSeller = data || [];
-
+  console.log(bestSeller);
   return (
     <div className="seller-list">
       <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={"auto"}>

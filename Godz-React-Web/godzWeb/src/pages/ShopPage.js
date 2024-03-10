@@ -3,8 +3,8 @@ import useSWR from "swr";
 import { fetcher } from "../config";
 import SellerCard from "../components/seller/SellerCard";
 
-const ShopPage = ({ endPoint, subEndPoint }) => {
-  const { data } = useSWR(`${endPoint}${subEndPoint}`, fetcher);
+const ShopPage = ({ url, endPoint }) => {
+  const { data } = useSWR(`${url}${endPoint}`, fetcher);
   const products = data || [];
   return (
     <div className="py-10 page-container">

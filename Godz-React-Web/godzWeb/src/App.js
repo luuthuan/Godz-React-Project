@@ -9,7 +9,6 @@ import { getAnalytics } from "firebase/analytics";
 import { Route, Routes } from "react-router-dom";
 import Main from "./layouts/Main";
 import HomePage from "./pages/HomePage";
-import BannerList from "./components/banner/BannerList";
 import ShopPage from "./pages/ShopPage";
 import SocialPage from "./pages/SocialPage";
 import AboutPage from "./pages/About";
@@ -34,24 +33,27 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 function App() {
-  const endPoint = "https://65e08910d3db23f7624987f0.mockapi.io/api/v1/";
+  const url = "https://65e08910d3db23f7624987f0.mockapi.io/api/v1/";
   return (
     <Fragment>
       <Routes>
         <Route element={<Main image={image}></Main>}>
           <Route
             path="/"
-            element={<HomePage endPoint={endPoint}></HomePage>}
+            element={<HomePage url={url}></HomePage>}
           ></Route>
           <Route
             path="/shops"
             element={
-              <ShopPage endPoint={endPoint} subEndPoint={"products"}></ShopPage>
+              <ShopPage url={url} endPoint={"products_v1"}></ShopPage>
             }
           ></Route>
           <Route path="/socials" element={<SocialPage></SocialPage>}></Route>
           <Route path="/about" element={<AboutPage></AboutPage>}></Route>
-          <Route path="/shop/:productId" element={<ShopDetailPage></ShopDetailPage>}></Route>
+          <Route
+            path="/shop/:productId"
+            element={<ShopDetailPage></ShopDetailPage>}
+          ></Route>
         </Route>
       </Routes>
     </Fragment>
