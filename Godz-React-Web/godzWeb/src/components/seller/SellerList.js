@@ -17,7 +17,6 @@ const SellerList = ({ url, endPoint }) => {
               <SellerCard item={item}></SellerCard>
             </SwiperSlide>
           ))}
-        ;
       </Swiper>
     </div>
   );

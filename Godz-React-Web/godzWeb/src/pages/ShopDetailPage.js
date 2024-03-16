@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../config";
 import { SwiperSlide, Swiper } from "swiper/react";
+import OptionCard from "../components/others/OptionCard";
+import InputAmount from "../components/others/InputAmount";
+import Voucher from "../components/others/Voucher";
 
 const ShopDetailPage = () => {
   const { productId } = useParams();
@@ -69,121 +72,13 @@ const ShopDetailPage = () => {
           {/* body */}
           <div className="mb-12">
             {/* colors */}
-            <div className="mb-6">
-              <div className="flex justify-between mb-2">
-                <div>Màu sắc</div>
-              </div>
-              <div className="flex justify-start items-center gap-x-3">
-                {colors.length > 0 &&
-                  colors.map((color) => (
-                    <span
-                      key={color.id}
-                      className={
-                        color.stats
-                          ? "w-20 text-center py-1 px-2 border text-white border-white rounded-md capitalize cursor-pointer"
-                          : "w-20 text-center py-1 px-2 border opacity-85 text-gray-400 border-gray-400 rounded-md capitalize select-none"
-                      }
-                    >
-                      {color.colorName}
-                    </span>
-                  ))}
-              </div>
-            </div>
+            <OptionCard data={colors} title={"Color"}></OptionCard>
             {/* size */}
-            <div className="mb-6">
-              <div className="flex justify-between mb-2">
-                <div>Size</div>
-                <div>Bảng size</div>
-              </div>
-              <div className="flex justify-start items-center gap-x-3">
-                {sizes.length > 0 &&
-                  sizes.map((size) => (
-                    <span
-                      key={size.id}
-                      className={
-                        size.stats
-                          ? "w-20 text-center py-1 px-2 border text-white border-white rounded-md capitalize cursor-pointer"
-                          : "w-20 text-center py-1 px-2 opacity-85 text-gray-400 border border-gray-400 rounded-md capitalize select-none"
-                      }
-                    >
-                      {size.size}
-                    </span>
-                  ))}
-              </div>
-            </div>
+            <OptionCard data={sizes} title={"Size"}></OptionCard>
             {/* count */}
-            <div className="flex justify-between items-center mb-6">
-              <div>Số lượng</div>
-              <div className="flex justify-between items-center gap-x-1">
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 12h14"
-                    />
-                  </svg>
-                </button>
-                <input className="w-12 px-2 py-1 mx-4 rounded-md" />
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <InputAmount></InputAmount>
             {/* voucher */}
-            <div className="flex justify-between items-center bg-slate-600 h-12 px-2 py-4 rounded-lg capitalize">
-              <div className="flex items-center gap-x-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
-                  />
-                </svg>
-                <span>Voucher shop</span>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </div>
+            <Voucher></Voucher>
           </div>
           {/* footer */}
           <div className="mb-12">
